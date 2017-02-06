@@ -11863,7 +11863,7 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <p>The Smartcab doesn't move at all during the simulation.<br>
-The driving agent recieves positive points as reward when obeying the traffic rule and  receives negative points as reward when disobeying the traffic rule. Because the Smartcab doesn't move, there are only two cases.  When properly idled at a red light, it get rewards like 1.48, 2.37 etc. When idled at a green light with no oncoming traffic, it get rewards like -4.22. -5.97 etc.</p>
+The driving agent recieves positive points as reward when obeying the traffic rule and  receives negative points as reward when disobeying the traffic rule. Because the Smartcab doesn't move, there are only three cases.  When properly idled at a red light, it get rewards like 1.48, 2.37 etc; When idled at a green light with no oncoming traffic, it get rewards like -4.22. -5.97 etc;  When idled at a green light with oncoming traffic, it get rewards like 0.92, 1.28 etc.</p>
 
 </div>
 </div>
@@ -13082,7 +13082,7 @@ This Smartcab can not be considered as safe for its high rate of bad actions. It
 'waypoint' leads the Smartcab to the destination, which is needed for efficiency.<br>
 For safety, the Smartcan needs to obey the traffic rules. It needs to know the color of light at the intersection. On a red light, a right turn is permitted if no oncoming traffic is approaching from the left. So 'left', the intended direction of travel for a vehicle to the Smartcab's left is needed. On a green light, a left turn is permitted if there is no oncoming traffic making a right turn or coming straight through the intersection. So 'oncoming', the intended direction of travel for a vehicle across the intersection from the Smartcab is also needed. Therefore, 'light', 'left', 'oncoming' are necessary for the Smartcab to obey the traffic rules.<br>
 'right' is not used. Because it has no effect on the decisions Smartcab is to make.<br>
-'deadline' is not used. It will add too many states for the Smartcab to learn. It's also useless because the Smartcab must obey the traffic rule and there is no shortcuts. The Smartcab's action can't be affected by the deadline.</p>
+'deadline' is not used. It's useless because the Smartcab must obey the traffic rule, and its action can't be affected by the deadline.  With 'deadline', it will encourage the smartcab to break traffic rules when time is running out.</p>
 
 </div>
 </div>
@@ -16599,6 +16599,7 @@ I'm satisfied with the safety and reliability of the rating in general except th
 <p><strong>Answer:</strong></p>
 <table>
 <thead><tr>
+<th style="text-align:center">state</th>
 <th style="text-align:center">States (waypoint, light, left, oncoming)</th>
 <th style="text-align:center">Optimal policy</th>
 <th style="text-align:center">Q-Learned policy</th>
@@ -16606,30 +16607,46 @@ I'm satisfied with the safety and reliability of the rating in general except th
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">('right', 'green', 'forward', 'right')</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">('forward', 'green', None, 'left')</td>
+<td style="text-align:center">forward</td>
+<td style="text-align:center">forward</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">('right', 'red', 'left', None)</td>
 <td style="text-align:center">right</td>
 <td style="text-align:center">right</td>
 </tr>
 <tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">('left', 'green', 'left', 'left')</td>
+<td style="text-align:center">left</td>
+<td style="text-align:center">left</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
 <td style="text-align:center">('forward', 'red', None, 'right')</td>
 <td style="text-align:center">None</td>
 <td style="text-align:center">None</td>
 </tr>
 <tr>
-<td style="text-align:center">('right', 'red', 'right', 'left')</td>
-<td style="text-align:center">right</td>
-<td style="text-align:center">right</td>
-</tr>
-<tr>
+<td style="text-align:center">5</td>
 <td style="text-align:center">('left', 'green', None, 'forward')</td>
 <td style="text-align:center">None</td>
 <td style="text-align:center">forward</td>
 </tr>
 </tbody>
 </table>
-<p>The policy is correct for the given states by obeying the traffic rules. For the listed examples, the first three are as expected from optimal policy. For the last case, I suppose the driver agent to act None to wait for the oncoming car to pass. But it makes sense for the agent to forward after checking the state-action rewards. 
-('left', 'green', None, 'forward')
- -- forward : 7.09; -- None : -0.90;-- right : 4.09; -- left : -16.48. The action of left is heavily penalized since oncoming car is going forward. None is also considered as minor violation as set in act() function when light is green, oncoming not left. Forward and right both obey the rules with positive rewards. 'Forward' has the highest score, it is reasonable since it doesn't go away from the intented direction 'left' too much as 'right'.</p>
+<p>The table above list some examples for the optimal policy and Q-Learned policy for some cases.<br>
+For an optimal policy, the agent could go forward when the light is green, and one example is state 1; the agent could turn right when light is green or the light is red but no traffic approaching from the left, and one example is state 2; the agent could turn left when light is green with no coming traffic making right or coming strait, and one example is state 3; the agent shoud act None when it intended to go straight but the light is red, like in state 4.</p>
+<p>For the listed examples, 1-4 states are correct as expected from optimal policy. For the state 5, I suppose the driver agent to act None to wait for the oncoming car to pass. But it makes sense for the agent to forward after checking the state-action rewards. In this model, acting none when light is green is considered as minor violation.<br>
+('left', 'green', None, 'forward')<br>
+-- forward : 7.09;<br>
+ -- None : -0.90;<br>
+ -- right : 4.09;<br>
+ -- left : -16.48.<br>
+ The action of left is heavily penalized since oncoming car is going forward. None is also considered as minor violation as set in act() function when light is green, oncoming not left. Forward and right both obey the rules with positive rewards. 'Forward' has the highest score, it is reasonable since it doesn't go away from the intented direction 'left' too much as 'right'.</p>
 
 </div>
 </div>
