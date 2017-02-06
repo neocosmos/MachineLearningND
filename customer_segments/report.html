@@ -13917,6 +13917,104 @@ o+AAAAAASUVORK5CYII=
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[7]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Fresh</th>
+      <td>1.000000</td>
+      <td>0.100510</td>
+      <td>-0.011854</td>
+      <td>0.345881</td>
+      <td>-0.101953</td>
+      <td>0.244690</td>
+    </tr>
+    <tr>
+      <th>Milk</th>
+      <td>0.100510</td>
+      <td>1.000000</td>
+      <td>0.728335</td>
+      <td>0.123994</td>
+      <td>0.661816</td>
+      <td>0.406368</td>
+    </tr>
+    <tr>
+      <th>Grocery</th>
+      <td>-0.011854</td>
+      <td>0.728335</td>
+      <td>1.000000</td>
+      <td>-0.040193</td>
+      <td>0.924641</td>
+      <td>0.205497</td>
+    </tr>
+    <tr>
+      <th>Frozen</th>
+      <td>0.345881</td>
+      <td>0.123994</td>
+      <td>-0.040193</td>
+      <td>1.000000</td>
+      <td>-0.131525</td>
+      <td>0.390947</td>
+    </tr>
+    <tr>
+      <th>Detergents_Paper</th>
+      <td>-0.101953</td>
+      <td>0.661816</td>
+      <td>0.924641</td>
+      <td>-0.131525</td>
+      <td>1.000000</td>
+      <td>0.069291</td>
+    </tr>
+    <tr>
+      <th>Delicatessen</th>
+      <td>0.244690</td>
+      <td>0.406368</td>
+      <td>0.205497</td>
+      <td>0.390947</td>
+      <td>0.069291</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13934,8 +14032,7 @@ o+AAAAAASUVORK5CYII=
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>Milk and Grocery; Grocery and Detergents_Paper; Milk and Detergents_paper show clear positive correlation. 
-I attempted to predict "Fresh". From the plot, "Fresh" doesn't show clear correlation with other features. This confirms with my negative score using decision tree with the rest of features. These features are not normally distributed. They are highly right skewed with most values below 10,000.</p>
+<p>Grocery and Detergents_Paper has a strong positive correlation of 0.92; Milk and Grocery, Milk and Detergents_paper also show clear positive correlation. I attempted to predict "Fresh". From the plot, "Fresh" doesn't show clear correlation with other features. This confirms with my negative score using decision tree with the rest of features. These features are not normally distributed. They are highly right skewed with most values below 10,000.</p>
 
 </div>
 </div>
@@ -13967,7 +14064,7 @@ I attempted to predict "Fresh". From the plot, "Fresh" doesn't show clear correl
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Scale the data using the natural logarithm</span>
@@ -17709,7 +17806,7 @@ QmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display the log-transformed sample data</span>
@@ -17800,7 +17897,7 @@ Once you have performed this implementation, the dataset will be stored in the v
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># For each feature find the data points with extreme high or low values</span>
@@ -18488,7 +18585,7 @@ Once you have performed this implementation, the dataset will be stored in the v
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>Data points with index number 65, 66, 75, 128, 154 are considered as outliers. They have more than one features beyond an outlier step outside of the IQR. These points are removed from the dataset. These outliers may be noise like wrong type-in. The outliers could affect the model's performance. By checking these points, they show small values in several features. Since we are trying to predict customer segments for the majority of customers, it's safe to remove these outliers, which is about 1% of total data samples.</p>
+<p>Data points with index number 65, 66, 75, 128, 154 are considered as outliers. They have more than one features beyond an outlier step outside of the IQR. These points are removed from the dataset. These outliers may be noise like wrong type-in. By checking these points, they show small values in several features. Since we are trying to predict customer segments for the majority of customers, it's safe to remove these outliers, which is about 1% of total data samples.  Also, the GMM model used later is based on normal distribution assumption. The outliers could affect the model's performance by shifting the optimal number of clusters decided by Silhouette score from 2 to 3.</p>
 
 </div>
 </div>
@@ -18520,7 +18617,7 @@ Once you have performed this implementation, the dataset will be stored in the v
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Apply PCA by fitting the good data with the same number of dimensions as features</span>
@@ -18533,6 +18630,7 @@ Once you have performed this implementation, the dataset will be stored in the v
 
 <span class="c1"># Generate PCA results plot</span>
 <span class="n">pca_results</span> <span class="o">=</span> <span class="n">vs</span><span class="o">.</span><span class="n">pca_results</span><span class="p">(</span><span class="n">good_data</span><span class="p">,</span> <span class="n">pca</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">pca_results</span><span class="p">[</span><span class="s1">&#39;Explained Variance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -18542,6 +18640,19 @@ Once you have performed this implementation, the dataset will be stored in the v
 <div class="output_wrapper">
 <div class="output">
 
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Dimension 1    0.4430
+Dimension 2    0.7068
+Dimension 3    0.8299
+Dimension 4    0.9311
+Dimension 5    0.9796
+Dimension 6    1.0000
+Name: Explained Variance, dtype: float64
+</pre>
+</div>
+</div>
 
 <div class="output_area"><div class="prompt"></div>
 
@@ -18924,10 +19035,10 @@ CAAAGJ5gBAAADE8wAgAAhicYAQAAw/v/Jyd2nN2lSHkAAAAASUVORK5CYII=
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <p>70.68% variance in the data is explained by the first and second principal component. 93.11% variance in the data is explained by the first four principal components.<br>
-For dimension 1, detergent paper, grocery and milk has strong negative weights. So this dimension characterize customer who spend less on detergent paper, grocery and milk.<br>
-For demension 2, fresh, frozen and delicatessen has strong negative weights. So this dimension characterize customer who spend less on fresh, frozen and delicatessen.<br>
-For demension 3, delicatessen has strong positive weights and fresh has strong negative weights. So this dimension characterize customer who spend more on delicatessen while less on fresh.<br>
-For demension 4, frozen has strong positive weights and delicatessen has strong negative weights. So this dimension characterize customer who spend more on frozen while less on delicatessen.</p>
+For dimension 1, detergent paper, grocery and milk has strong negative weights. So this dimension characterize customer who spend less on detergent paper, grocery and milk.  These are the opposite features for a retailer and it's likely to separate out restaurants using both fresh and frozen food.<br>
+For demension 2, fresh, frozen and delicatessen has strong negative weights. So this dimension characterize customer who spend less on fresh, frozen and delicatessen. It's likely to separate out retailers.<br>
+For demension 3, delicatessen has strong positive weights and fresh has strong negative weights. So this dimension characterize customer who spend more on delicatessen while less on fresh.  It's likely to separate out shops selling deli food.<br>
+For demension 4, frozen has strong positive weights and delicatessen has strong negative weights. So this dimension characterize customer who spend more on frozen while less on delicatessen. It's likely to separate out cafes selling fast food using frozen food or icecream shops.</p>
 
 </div>
 </div>
@@ -18944,7 +19055,7 @@ For demension 4, frozen has strong positive weights and delicatessen has strong 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display sample log-data after having a PCA transformation applied</span>
@@ -19032,7 +19143,7 @@ For demension 4, frozen has strong positive weights and delicatessen has strong 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Apply PCA by fitting the good data with only two dimensions</span>
@@ -19066,7 +19177,7 @@ For demension 4, frozen has strong positive weights and delicatessen has strong 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display sample log-data after applying PCA transformation in two dimensions</span>
@@ -19133,7 +19244,7 @@ For demension 4, frozen has strong positive weights and delicatessen has strong 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Create a biplot</span>
@@ -19148,11 +19259,11 @@ For demension 4, frozen has strong positive weights and delicatessen has strong 
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[14]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[38]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0xc3a5710&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0xab4e6d8&gt;</pre>
 </div>
 
 </div>
@@ -20273,7 +20384,8 @@ uqg7jsOZAAAAAElFTkSuQmCC
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <p>K-Means is simple and easy to implement. It's efficient in terms of computational cost. K-Means is a special case of GMM. It's hard assignment that each data point is assigned to one cluster. Gaussian Mixture Model is the fastest algorithm for learning mixture models. It assumes all the data points are generated from a mixture of a finite number of Gaussian distributions with unknown parameters. It is soft assignment by giving each data point the probability to belong to certain cluster. Therefore, GMM is more flexible, and each cluster can have unconstrained covariance structure.</p>
-<p>I will choose to use the Gaussian Mixture Model. Because in this project, the correlation between features will break the spherical assumption needed by KNN. Some of customers may belong to different clusters. GMM is more suitable here.</p>
+<p>I will choose to use the Gaussian Mixture Model. Because in this project, the dataset is quite small and scalability is not an issue.
+The correlation between features will break the spherical assumption needed by KNN. Some of customers may belong to different clusters. GMM is more suitable here.</p>
 
 </div>
 </div>
@@ -20301,7 +20413,7 @@ uqg7jsOZAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Apply your clustering algorithm of choice to the reduced data </span>
@@ -20310,7 +20422,7 @@ uqg7jsOZAAAAAElFTkSuQmCC
 
 <span class="n">gmm</span> <span class="o">=</span> <span class="n">GaussianMixture</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">gmm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">reduced_data</span><span class="p">)</span>
-
+ 
 <span class="c1"># TODO: Predict the cluster for each data point</span>
 <span class="n">preds</span> <span class="o">=</span> <span class="n">gmm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">reduced_data</span><span class="p">)</span> 
 
@@ -20321,8 +20433,9 @@ uqg7jsOZAAAAAElFTkSuQmCC
 <span class="n">sample_preds</span> <span class="o">=</span> <span class="n">gmm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">pca_samples</span><span class="p">)</span>
 
 <span class="c1"># TODO: Calculate the mean silhouette coefficient for the number of clusters chosen</span>
-<span class="n">score</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">reduced_data</span><span class="p">,</span> <span class="n">preds</span><span class="p">)</span>
-
+<span class="c1"># This is Euclidean for KMeans (default)and Mahalanobis for general GMM</span>
+<span class="n">score</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">reduced_data</span><span class="p">,</span> <span class="n">preds</span><span class="p">,</span>  <span class="n">metric</span><span class="o">=</span> <span class="s1">&#39;mahalanobis&#39;</span><span class="p">)</span>
+    
 <span class="c1">#for i in range(2,7):</span>
 <span class="c1">#    print &quot;n_components: &quot;, i,&quot; score: &quot;, gmm_model(i)</span>
 </pre></div>
@@ -20348,12 +20461,12 @@ uqg7jsOZAAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>cluster numbers:  2    score:  0.421916846463<br>
-cluster numbers:  3    score:  0.404248738241<br>
-cluster numbers:  4    score:  0.359126618412<br>
-cluster numbers:  5    score:  0.287520294039<br>
-cluster numbers:  6    score:  0.305333576605</p>
-<p>2 cluster numbers has the best silhouette score of 0.42.</p>
+<p>cluster numbers:  2    score:  0.375986045466<br>
+cluster numbers:  3    score:  0.344648766561<br>
+cluster numbers:  4    score:  0.325466860933<br>
+cluster numbers:  5    score:  0.231164559753<br>
+cluster numbers:  6    score:  0.285171852974</p>
+<p>2 cluster numbers has the best silhouette score of 0.37.</p>
 
 </div>
 </div>
@@ -20370,7 +20483,7 @@ cluster numbers:  6    score:  0.305333576605</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[74]:</div>
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display the results of the clustering from implementation</span>
@@ -21160,7 +21273,7 @@ NgxAkiRJkmrDACRJkiSpNgxAkiRJkmrj/wHrL+LKbFANQgAAAABJRU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Inverse transform the centers</span>
@@ -21266,7 +21379,7 @@ Segment 1 has Milk, Grocery and Detergents paper above 75th percentile, Fresh ne
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[77]:</div>
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display the predictions</span>
@@ -21301,7 +21414,10 @@ Sample point 2 predicted to be in Cluster 1
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>Segment 0 best represents sample point 0 and point 1. Segment 1 best represents sample point 2. In Q1, sample point 0 and 1 are predicated to be cafe and sample 2 is predicted to be retailer. Therefore the predictions are consistent here.</p>
+<p>Sample 0 has large cost on Fresh and Milk, but low cost on detergents paper, it's likely to belong to segment 0.<br>
+Sample 1 has large cost on Frozen, low cost on Fresh,  it's likely to belong to segment 0.<br>
+Sample 2 has large cost on grocery and  detergents paper, it's likely to belong to segment 1.</p>
+<p>From the code results above, sample 0 and sample 1 are predicted to be in Cluster 0, and sample 2 is predicted to be in Cluster 1. The results agree with the guess above. In Q1, sample point 0 and 1 are predicated to be cafe and sample 2 is predicted to be retailer. Therefore the predictions are consistent here.</p>
 
 </div>
 </div>
@@ -21343,7 +21459,7 @@ Sample point 2 predicted to be in Cluster 1
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <p>For segment 0 and segment 1, the change affect is likely to be different. Segment 0, which has relative high cost on fresh, may be more sensitive to the delivery frequency.</p>
-<p>For each segment, the wholesale distributor can perform A/B test by dividing the samples of each segment equally to control group and experiment goup. For the control group, the delivery service doesn't change. For the experiment group, the delivery service changes to 3 days a week. Then the wholesale distributor can check the complaints rates about the delivery service change or delivery cancel rate between the two groups. Then the distributor can learn the reaction of each segment customers to the change in delivery service.</p>
+<p>The wholesale distributor can perform A/B test by randomly choosing statistically large samples for each segment. Then, divide the samples of each segment equally to control group and experiment goup. For the control group, the delivery service doesn't change. For the experiment group, the delivery service changes to 3 days a week. Then the wholesale distributor can check the complaints rates about the delivery service change or delivery cancel rate between the two groups. Then the distributor can learn the reaction of each segment customers to the change in delivery service.</p>
 
 </div>
 </div>
