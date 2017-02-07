@@ -130,6 +130,7 @@ class LearningAgent(Agent):
 		else:
 			action_list = self.valid_actions
 			# shuffle the action list and return the first action with max Q
+			# equivalent as random select from a list of max values
 			random.shuffle(action_list)
 
 			for i in action_list:
@@ -150,7 +151,7 @@ class LearningAgent(Agent):
         # When learning, implement the value iteration update rule
         #   Use only the learning rate 'alpha' (do not use the discount factor 'gamma')
 	if self.learning == True:
-		self.Q[state][action] = self.Q[state][action] + self.alpha*(reward + self.get_maxQ(state)- self.Q[state][action])
+		self.Q[state][action] = self.Q[state][action] + self.alpha*(reward - self.Q[state][action])
 
         return
 
